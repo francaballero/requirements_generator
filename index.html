@@ -170,10 +170,10 @@
                 <ul>
                     <li><b>Precondition:</b> Necessary conditions to invoke the requirement.</li>
                     <li><b>Trigger:</b> Event that initiates the requirement.</li>
-                    <li><b>System response:</b> Represents the system behavior, which is activated if and only if, the preconditions and trigger are true.</li>
+                    <li><b>System response:</b> Represents the system behaviour, which is activated if and only if, the preconditions and trigger are true.</li>
                 </ul>
 
-                <p>Mavin et al. stated that the generic requirement syntax is specialized into five types (Ubiquitous, Event-driven, Unwanted behaviors, State-driven and Optional features), described in the following subsections.</p>
+                <p>Mavin et al. stated that the generic requirement syntax is specialized into four types (Ubiquitous, Event-driven, Unwanted behaviours, State-driven and Optional features), described in the following subsections.</p>
 
                 <h5>Ubiquitous requirements</h5>
 
@@ -182,6 +182,8 @@
                 <br>
                 <code>The &lt;system name&gt; shall &lt;system response&gt;</code>
                 <p class="text-center"><b>Listing 1.2:</b> Ubiquitous requirements format.</p>
+                <br>
+                <p><i><strong>For example:</strong> The software shall be written in Java.</i></p>
 
 
                 <h5>Event-driven requirements</h5>
@@ -191,14 +193,19 @@
                 <br>
                 <code>WHEN &lt;optional preconditions&gt; &lt;optional trigger&gt; the &lt;system name&gt; shall &lt;system response&gt;</code>
                 <p class="text-center"><b>Listing 1.3:</b> Event-driven requirements format.</p>
+                <br>
+                <p><i><strong>For example:</strong> When a DVD is inserted into the DVD player, the OS shall spin up the optical drive.</i></p>
 
-                <h5>Unwanted behaviors</h5>
 
-                <p>Requirements for unwanted behaviors (failures, error conditions, disturbances, deviations...) use IF and THEN keywords and have the format shown in Listing 1.4.</p>
+                <h5>Unwanted behaviours</h5>
+
+                <p>Requirements for unwanted behaviours (failures, error conditions, disturbances, deviations...) use IF and THEN keywords and have the format shown in Listing 1.4.</p>
 
                 <br>
                 <code>IF &lt;optional preconditions&gt; &lt;optional trigger&gt;, THEN the &lt;system name&gt; shall &lt;system response&gt;</code>
-                <p class="text-center"><b>Listing 1.4:</b> Unwanted behaviors format.</p>
+                <p class="text-center"><b>Listing 1.4:</b> Unwanted behaviours format.</p>
+                <br>
+                <p><i><strong>For example:</strong> If the memory checksum is invalid, then the software shall display an error message.</i></p>
 
                 <h5>State-driven requirements</h5>
 
@@ -206,7 +213,9 @@
 
                 <br>
                 <code>WHILE &lt;in a specific state&gt;  the &lt;system name&gt; shall &lt;system response&gt;</code>
-                <p class="text-center"><b>Listing 1.5:</b> Unwanted behaviors format.</p>
+                <p class="text-center"><b>Listing 1.5:</b> Unwanted behaviours format.</p>
+                <br>
+                <p><i><strong>For example:</strong> While the autopilot is engaged, the software shall display a visual indication to the pilot.</i></p>
 
                 <h5>Optional requirements</h5>
 
@@ -215,10 +224,15 @@
                 <br>
                 <code>WHERE &lt;feature is included&gt;  the &lt;system name&gt; shall &lt;system response&gt;</code>
                 <p class="text-center"><b>Listing 1.6:</b> Optional requirements format..</p>
+                <br>
+                <p><i><strong>For example:</strong> Where a HDMI port is present, the software shall allow the user to select HD content for viewing.</i></p>
+
 
                 <h5>Complex requirements</h5>
 
                 <p>Requirements with complex conditional clauses can be defined with a combination of the keywords WHEN, IF and THEN, WHILE and WHERE.</p>
+                <br>
+                <p><i><strong>For example:</strong> When the landing gear button is depressed once, if the software detects that the landing gear does not lock into position, then the software shall sound an alarm.</i></p>
 
             </div>
             <div class="col-md-12 notation-description">
@@ -1331,14 +1345,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="js/jspdf.min.js"></script>
-
     <script src="js/appController.js"></script>
-
-    <script>
-        $("[data-toggle=tooltip]").tooltip({
-            placement: $(this).data("placement") || 'top'
-        });
-    </script>
 
 </body>
 
