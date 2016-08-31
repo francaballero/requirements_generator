@@ -318,6 +318,7 @@ app.controller('appController', ['$scope', '$localStorage', '$sessionStorage', '
             $scope.terms[$scope.terms.length - 1].name = $scope.term_input.name;
             $scope.term_input = {};
             $scope.term_saved = true;
+            $localStorage.terms = $scope.terms;
         };
 
 
