@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="application">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Requirements Generator">
+    <meta name="author" content="Francisco José Caballero Cerezo">
+    <title>Requirements Generator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.min.css">
+
+    <!--[if IE]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body data-ng-controller="appController">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="" data-ng-click="goHome()"><img id="logo" src="img/logo.png" alt="Requirements Generator" /></a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="navbar-home"><a href="javascript:;" data-ng-click="goHome()">Home</a></li>
+                    <li><a href="javascript:;" data-ng-click="goMaster()">MAST<small>E</small>R</a></li>
+                    <li><a href="javascript:;" data-ng-click="goEars()">EARS</a></li>
+                    <li><a href="javascript:;" data-ng-click="goGlossary()">Glossary</a></li>
+                    <li><a href="javascript:;" data-ng-click="goResults()">Results</a></li>
+                </ul>
+            </div>
+            <!--.nav-collapse -->
+        </div>
+    </nav>
+    <!-- End navbar -->
+
+    <!-- This div prevents showing information before angularjs is totally rendered in the HTML DOM -->
+    <div data-ng-show="false" style="width: 100%; height: 100%;"></div>
+    <!-- -->
+
+    <div class="container">
+
+        <div class="home" data-ng-show="home">
+            <div class="col-md-6 col-sm-12 col-xs-12 pull-left notation-description">
+                <h3>MAST<small>E</small>R</h3>
+                <br>
+                <p>In 2014, Rupp et al. presented the <b>MAST<small>E</small>R</b> (Mustergültige Anforderungen - die SOPHIST Templates für Requirements) template-system [RdS14b].</p>
+
+                <p>It allows writing requirement specifications through some basic types: functional and non-functional requirements (divided in property, environment and process requirements).</p>
+
+                <h5>Functional requirements</h5>
+
+                <p>Functional requirements can be specified with the FunctionalMASTeR template, shown in Figure 1.1. The uppercase words represent the template ﬁxed values and the lowercase words with angle brackets represent the attributes that have to be ﬁlled in [Gro15].</p>
+
+                <img src="img/functionalmaster.png" alt="FunctionalMASTER" />
+                <div class="text-center"><b>Figure 1.1:</b> FunctionalMAST<small>E</small>R template, extracted from [RdS14b].</div>
+                <br>
+
+                <p>The elements are:</p>
+                <ul>
+                    <li><b>Condition:</b> Shall be specified with the ConditionMAST<small>E</small>R, LogicMAST<small>E</small>R, EventMAST<small>E</small>R or TimeMAST<small>E</small>R templates [RdS14b].</li>
+                    <li><b>System:</b> Represents the system or component that should provide the functionality.</li>
+                    <li><b>Liability:</b> Modal verbs are used to express liability:</li>
+                    <li>
+                        <ul>
+                            <li>Shall: Statement is legal binding and mandatory.</li>
+                            <li>Should: Statement is desired, but not mandatory.</li>
+                            <li>Will: Statement is recommended, but not mandatory.</li>
+                        </ul>
+                    </li>
+                    <li><b>Activity type:</b> The different types of system activities are the following [RdS14a]:</li>
+                    <li>
+                        <ul>
+                            <li>Independent system action: (-) The system performs the process by itself.</li>
+                            <li>User interaction: (PROVIDE &lt;actor&gt; WITH THE ABILITY TO) The system provides the user with some process functionality.</li>
+                            <li>Interface requirement: (BE ABLE TO) The system performs the process dependent on a third factor.</li>
+                        </ul>
+                    </li>
+                    <li><b>Process verb:</b> Represents the process: procedures (functionality) and actions to be provided by the system [RdS14a].</li>
+                </ul>
+                <br>
+                <p><i><strong>For example:</strong> The document editor shall provide the user with the ability to create new documents.</i></p>
+
+                <h5>Property requirements</h5>
+                <p>Property requirements describe properties of the system. PropertyMASTeR template (Figure 1.2) is proposed.</p>
+
+                <img src="img/propertymaster.png" alt="PropertyMASTER" />
+                <div class="text-center"><b>Figure 1.2:</b> PropertyMAST<small>E</small>R template, extracted from [RdS14b].</div>
+                <br>
+
+                <p>According to Großer [Gro15]:</p>
+
+                <ul>
+                    <li><b>Characteristic:</b> Is the property of the subject matter.</li>
+                    <li><b>Subject matter:</b> Represents the system, sub-system, component, function...</li>
+                    <li><b>Qualifying expression:</b> Specifies the range of the value.</li>
+                    <li><b>Value:</b> Is connected with the qualifying expression through the verb to BE.</li>
+                </ul>
+                <br>
+                <p><i><strong>For example:</strong> The design of the website should be responsive.</i></p>
+
+                <h5>Environment requirements</h5>
+                <p>Technological requirements of the system’s environment are described with EnvironmentMASTeR template (Figure 1.3). The ﬁxed values are designed in a way that make the requirement belongs to the system and not the environment [Gro15].</p>
+
+                <img src="img/environmentmaster.png" alt="EnvironmentMASTER" />
+                <div class="text-center"><b>Figure 1.3:</b> EnvironmentMAST<small>E</small>R template, extracted from [RdS14b].</div>
+                <br>
+                <p><i><strong>For example:</strong> The charger of the device shall be designed in a way the system can be operated in a range 100-240V/50-60Hz.</i></p>
+
+                <h5>Process requirements</h5>
+                <p>Process requirements can be worded with the ProcessMASTeR template (Figure 1.4), which is based on the independent system action version of the FunctionalMASTeR template. Process requirements are related to activities or legal-contractual requirements, as well as non-functional requirements. In this template, the subject of the requirement is an actor and not the system [Gro15].</p>
+
+                <img src="img/processmaster.png" alt="ProcessMASTER" />
+                <div class="text-center"><b>Figure 1.4:</b> ProcessMAST<small>E</small>R template, extracted from [RdS14b].</div>
+                <br>
+                <p><i><strong>For example:</strong> The software developers should work according to the Personal Software Process (PSP).</i></p>
+
+                <h5>Conditions</h5>
+
+                <p>In the case that the functionality is only given or provided under certain logical or temporal conditions, the ConditionMASTeR template must be applied (Figure 1.5) [RdS14a].</p>
+
+                <img src="img/conditionmaster.png" alt="ConditionMASTER" />
+                <div class="text-center"><b>Figure 1.5:</b> ConditionMAST<small>E</small>R template, extracted from [RdS14b].</div>
+                <br>
+                <p><i><strong>For example:</strong> If the server could not found what was requested.</i></p>
+                <br>
+
+                <p>A more precise specification for conditions can be obtained by the use of LogicMASTeR, EventMASTeR or TimeMASTeR templates.</p>
+
+                <p>LogicMASTeR (Figure 1.6) is used to specify logical conditions. The logical statement is made through a compared object, an actor or a system [RdS14b].</p>
+
+                <img src="img/logicmaster.png" alt="LogicMASTER" />
+                <div class="text-center"><b>Figure 1.6:</b> LogicMAST<small>E</small>R template, extracted from [RdS14b].</div>
+                <br>
+
+                <p>With EventMASTeR (Figure 1.7), requirements are initiated as soon as the event condition is satisfied. The term event summarizes the possible events that may affect the system [RdS14b].</p>
+
+                <img src="img/eventmaster.png" alt="EventMASTER" />
+                <div class="text-center"><b>Figure 1.7:</b> EventMAST<small>E</small>R template, extracted from [RdS14b].</div>
+                <br>
+
+                <p>TimeMASTeR (Figure 1.8) is used to specify a certain period of time when a system or object may have temporary behaviours. Both, conditions and requirements, end at the same time [RdS14b].</p>
+
+                <img src="img/timemaster.png" alt="TimeMASTER" />
+                <div class="text-center"><b>Figure 1.8:</b> TimeMAST<small>E</small>R template, extracted from [RdS14b].</div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12 pull-right notation-description">
+                <h3>EARS</h3>
+                <br>
+                <p><b>EARS</b> (Easy Approach to Requirements Syntax) template-system was created by Mavin et al. and presented at the 17th IEEE International Requirements Engineering Conference [MWHN09].</p>
+
+                <br>
+                <code>&lt;optional preconditions&gt; &lt;optional trigger&gt; the &lt;system name&gt; shall &lt;system response&gt;</code>
+                <p class="text-center"><b>Listing 1.1:</b> Generic requirement syntax.</p>
+                <br>
+
+                <p>The simplest structure of EARS system is the generic requirement syntax (shown in Listing 1.1). According to Marvin et al. [MWHN09], their elements are:</p>
+
+                <ul>
+                    <li><b>Precondition:</b> Necessary conditions to invoke the requirement.</li>
+                    <li><b>Trigger:</b> Event that initiates the requirement.</li>
+                    <li><b>System response:</b> Represents the system behavior, which is activated if and only if, the preconditions and trigger are true.</li>
+                </ul>
+
+                <p>Mavin et al. stated that the generic requirement syntax is specialized into five types (Ubiquitous, Event-driven, Unwanted behaviors, State-driven and Optional features), described in the following subsections.</p>
+
+                <h5>Ubiquitous requirements</h5>
+
+                <p>An ubiquitous requirement defines a fundamental property of the system and has no preconditions or trigger. The format is shown in Listing 1.2.</p>
+
+                <br>
+                <code>The &lt;system name&gt; shall &lt;system response&gt;</code>
+                <p class="text-center"><b>Listing 1.2:</b> Ubiquitous requirements format.</p>
+
+
+                <h5>Event-driven requirements</h5>
+
+                <p>An Event-driven requirement is activated only when a trigger occurs or is detected. It uses the keyword WHEN. Listing 1.3 shows its format.</p>
+
+                <br>
+                <code>WHEN &lt;optional preconditions&gt; &lt;optional trigger&gt; the &lt;system name&gt; shall &lt;system response&gt;</code>
+                <p class="text-center"><b>Listing 1.3:</b> Event-driven requirements format.</p>
+
+                <h5>Unwanted behaviors</h5>
+
+                <p>Requirements for unwanted behaviors (failures, error conditions, disturbances, deviations...) use IF and THEN keywords and have the format shown in Listing 1.4.</p>
+
+                <br>
+                <code>IF &lt;optional preconditions&gt; &lt;optional trigger&gt;, THEN the &lt;system name&gt; shall &lt;system response&gt;</code>
+                <p class="text-center"><b>Listing 1.4:</b> Unwanted behaviors format.</p>
+
+                <h5>State-driven requirements</h5>
+
+                <p>State-driven requirements are active while the system is in a specific state. They use the keyword WHILE or DURING (Listing 1.5).</p>
+
+                <br>
+                <code>WHILE &lt;in a specific state&gt;  the &lt;system name&gt; shall &lt;system response&gt;</code>
+                <p class="text-center"><b>Listing 1.5:</b> Unwanted behaviors format.</p>
+
+                <h5>Optional requirements</h5>
+
+                <p>Optional requirements are invoked only if the system includes a special feature. They use WHERE keyword, as shown in Listing 1.6.</p>
+
+                <br>
+                <code>WHERE &lt;feature is included&gt;  the &lt;system name&gt; shall &lt;system response&gt;</code>
+                <p class="text-center"><b>Listing 1.6:</b> Optional requirements format..</p>
+
+                <h5>Complex requirements</h5>
+
+                <p>Requirements with complex conditional clauses can be defined with a combination of the keywords WHEN, IF and THEN, WHILE and WHERE.</p>
+
+            </div>
+            <div class="col-md-12 notation-description">
+                <hr>
+                <h6>References</h6>
+                <p>[Gro15] Katharina Großer. Investigating the use of ontology techniques as a support for on-board software requirement engineering, 2015.</p>
+                <p>[MWHN09] A. Mavin, P. Wilkinson, A. Harwood, and M. Novak. <em>EARS (Easy Approach to Requirements Syntax)</em>. 17th IEEE International Requirements Engineering Conference, 2009.</p>
+                <p>[RdS14a] Chris Rupp and die SOPHISTen. <em>Requirements Templates - The Blueprint of your Requirement</em>. SOPHIST GmbH, 2014.</p>
+                <p>[RdS14b] Chris Rupp and die SOPHISTen. <em>Schablonen für alle Fälle</em>. SOPHIST GmbH, 2014.</p>
+                <hr>
+            </div>
+
+        </div>
+        <!-- End home -->
+
+        <div class="master" data-ng-show="master">
+            <div class="col-md-4 col-sm-4 col-xs-12 pull-right box-shadow-blue controlls">
+                <h5>Controls</h5>
+                <hr>
+                <form class="form-inline">
+                    <button type="button" class="btn btn-default new-term" data-ng-click="newTerm()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New term
+                    </button>
+                    <span data-ng-if="!term_saved">
+                                <span data-ng-repeat="term in terms" data-ng-if="$last">
+                                    <input class="form-control" type="text" placeholder="Term-{{$index+1}}" data-ng-model="term_input.name">
+                                    <button type="button" class="btn btn-default" data-ng-disabled="!term_input" data-ng-click="addtoTerms()"><span class="glyphicon glyphicon-ok text-gray"></span></button>
+                    </span>
+                    </span>
+                    <span class="success">&nbsp;&nbsp;Term saved successfully.</span>
+                </form>
+                <hr>
+                <label><small>MAST<small>E</small>R</small>
+                </label> <small>Requirements</small>
+                <br>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newFunctionalReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Functional
+                </button>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newPropertyReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Property
+                </button>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newEnvironmentReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Environment
+                </button>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newProcessReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Process
+                </button>
+                <br>
+                <label><small>MAST<small>E</small>R</small>
+                </label> <small>Conditions</small>
+                <br>
+                <button type="button" class="btn btn-default btn-xs condition" data-ng-click="newCondition()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Condition
+                </button>
+                <button type="button" class="btn btn-default btn-xs condition" data-ng-click="newLogic()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Logic
+                </button>
+                <button type="button" class="btn btn-default btn-xs condition" data-ng-click="newEvent()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Event
+                </button>
+                <button type="button" class="btn btn-default btn-xs condition" data-ng-click="newTime()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Time
+                </button>
+                <hr>
+                <div class="visible-lg visible-md preview">
+                    <h5 class="text-uppercase text-muted text-right">Preview</h5>
+                    <h4>Requirements:</h4>
+                    <br>
+                    <div data-ng-repeat="functionalreq in functionalrequirements">
+                        <b>FUN-RQ-{{$index+1}} </b> {{functionalreq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                    <div data-ng-repeat="propertyreq in propertyrequirements">
+                        <b>PRT-RQ-{{$index+1}} </b> {{propertyreq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                    <div data-ng-repeat="environmentreq in environmentrequirements">
+                        <b>EN-RQ-{{$index+1}} </b> {{environmentreq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                    <div data-ng-repeat="processreq in processrequirements">
+                        <b>PRO-RQ-{{$index+1}} </b> {{processreq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                    <div data-ng-repeat="condition in conditions">
+                        <b>{{condition[0].id}} </b>{{condition[1].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div data-ng-if="!defined_master">
+                    <p>Specify your requirements here.</p>
+                    <br>
+                    <p>To create a new <b>MAST<small>E</small>R</b> requirement or a new term, use the Controls menu.</p>
+                </div>
+
+                <!-- FunctionalMASTER -->
+                <div data-ng-repeat="functionalreq in functionalrequirements">
+                    <label>FUN-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- [<Condition>] -->
+                            <select data-ng-model="fun_1" class="form-control" data-ng-click="newConditionOver()" data-ng-mouseleave="newConditionLeave()" data-ng-options="condition[1].to_string for condition in conditions" data-ng-change="addtoFunctionalReq($index, 1, fun_1)">
+                                <option disabled value="">{{functionalreq[1].name || '[&lt;Condition&gt;]'}}</option>
+                            </select>
+                            <!-- <system> -->
+                            <select data-ng-model="fun_2" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoFunctionalReq($index, 2, fun_2)" data-wj-validation-error="!functionalreq[2].name">
+                                <option disabled value="">{{functionalreq[2].name || '&lt;system&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <liability> -->
+                            <select data-ng-model="fun_3" class="form-control" data-ng-options="liability.name for liability in liabilities" data-ng-change="addtoFunctionalReq($index, 3, fun_3)" data-wj-validation-error="!functionalreq[3].name">
+                                <option disabled value="">{{functionalreq[3].name || '&lt;liability&gt;'}}</option>
+                            </select>
+                            <!-- -choose- -->
+                            <select data-ng-model="fun_4" class="form-control" data-ng-options="term.name for term in functional_terms" data-ng-change="addtoFunctionalReq($index, 4, fun_4)" data-wj-validation-error="!functionalreq[4].name">
+                                <option disabled value="">{{functionalreq[4].name || '-choose-'}}</option>
+                            </select>
+
+                            <!-- case provide <actor> with the ability to -->
+                            <span data-ng-if="functionalreq[4].name=='provide <actor> with the ability to'">
+                                <!-- provide -->
+                                <span>{{functionalreq[5].name}}</span>
+                            <!-- <actor> -->
+                            <select data-ng-model="fun_6" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoFunctionalReq($index, 6, fun_6)" data-wj-validation-error="!functionalreq[6].name">
+                                <option disabled value="">{{functionalreq[6].name || '&lt;actor&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- with the ability to -->
+                            <span>{{functionalreq[7].name}}</span>
+                            </span>
+                            <span data-ng-if="functionalreq[4].name">
+                            <!-- <process verb> -->
+                            <select data-ng-model="fun_8" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoFunctionalReq($index, 8, fun_8)" data-wj-validation-error="!functionalreq[8].name">
+                                <option disabled value="">{{functionalreq[8].name || '&lt;process verb&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <object> -->
+                            <select data-ng-model="fun_9" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoFunctionalReq($index, 9, fun_9)" data-wj-validation-error="!functionalreq[9].name">
+                                <option disabled value="">{{functionalreq[9].name || '&lt;object&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeFunctionalReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-muted">{{functionalreq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END FunctionalMASTER -->
+
+                <!-- PropertyMASTER -->
+                <div data-ng-repeat="propertyreq in propertyrequirements">
+                    <label>PRT-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- [<Condition>] -->
+                            <select data-ng-model="prt_condition" class="form-control" data-ng-click="newConditionOver()" data-ng-mouseleave="newConditionLeave()" data-ng-options="condition[1].to_string for condition in conditions" data-ng-change="addtoPropertyReq($index, 1, prt_condition)">
+                                <option disabled value="">{{propertyreq[1].name || '[&lt;Condition&gt;]'}}</option>
+                            </select>
+                            <!-- <characteristic> -->
+                            <select data-ng-model="prt_characteristic" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoPropertyReq($index, 2, prt_characteristic)" data-wj-validation-error="!propertyreq[2].name">
+                                <option disabled value="">{{propertyreq[2].name || '&lt;characteristic&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <subject matter> -->
+                            <select data-ng-model="prt_subject_matter" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoPropertyReq($index, 3, prt_subject_matter)" data-wj-validation-error="!propertyreq[3].name">
+                                <option disabled value="">{{propertyreq[3].name || '&lt;subject matter&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <liability> -->
+                            <select data-ng-model="prt_liability" class="form-control" data-ng-options="liability.name for liability in liabilities" data-ng-change="addtoPropertyReq($index, 4, prt_liability)" data-wj-validation-error="!propertyreq[4].name">
+                                <option disabled value="">{{propertyreq[4].name || '&lt;liability&gt;'}}</option>
+                            </select>
+                            <!-- be -->
+                            <span>{{propertyreq[5].name}}</span>
+                            <!-- [<qualifying expression>] -->
+                            <select data-ng-model="prt_qualifying_expression" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-options="term.name for term in terms" data-ng-change="addtoPropertyReq($index, 6, prt_qualifying_expression)">
+                                <option disabled value="">{{propertyreq[6].name || '[&lt;qualifying expression&gt;]'}}</option>
+                            </select>
+                            <!-- <value> -->
+                            <select data-ng-model="prt_value" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoPropertyReq($index, 7, prt_value)" data-wj-validation-error="!propertyreq[7].name">
+                                <option disabled value="">{{propertyreq[7].name || '&lt;value&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <button type="button" class="btn btn-default" data-ng-click="removePropertyReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <p class="text-muted">{{propertyreq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END PropertyMASTER -->
+
+                <!-- EnvironmentMASTER -->
+                <div data-ng-repeat="environmentreq in environmentrequirements">
+                    <label>EN-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- <[component of the +] -->
+                            <select data-ng-model="en_1" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEnvironmentReq($index, 1, en_1)">
+                                <option disabled value="">{{environmentreq[1].name || '[&lt;component of the +]'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- subject matter> -->
+                            <select data-ng-model="en_2" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEnvironmentReq($index, 2, en_2)" data-wj-validation-error="!environmentreq[2].name">
+                                <option disabled value="">{{environmentreq[2].name || 'subject matter&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <liability> -->
+                            <select data-ng-model="en_3" class="form-control" data-ng-options="liability.name for liability in liabilities" data-ng-change="addtoEnvironmentReq($index, 3, en_3)" data-wj-validation-error="!environmentreq[3].name">
+                                <option disabled value="">{{environmentreq[3].name || '&lt;liability&gt;'}}</option>
+                            </select>
+                            <!-- be designed in a way -->
+                            <span>{{environmentreq[4].name}}</span>
+                            <!-- [<condition>] -->
+                            <select data-ng-model="en_5" class="form-control" data-ng-click="newConditionOver()" data-ng-mouseleave="newConditionLeave()" data-ng-options="condition[1].to_string for condition in conditions" data-ng-change="addtoEnvironmentReq($index, 5, en_5)">
+                                <option disabled value="">{{environmentreq[5].name || '[&lt;condition&gt;]'}}</option>
+                            </select>
+                            <!-- [<subject matter>] -->
+                            <select data-ng-model="en_6" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEnvironmentReq($index, 6, en_6)" data-wj-validation-error="!environmentreq[6].name">
+                                <option disabled value="">{{environmentreq[6].name || '&lt;subject matter&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- can be opperated -->
+                            <span>{{environmentreq[7].name}}</span>
+                            <!-- <characteristic> -->
+                            <select data-ng-model="en_8" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEnvironmentReq($index, 8, en_8)" data-wj-validation-error="!environmentreq[8].name">
+                                <option disabled value="">{{environmentreq[8].name || '&lt;characteristic&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- [<qualifying expression>] -->
+                            <select data-ng-model="en_9" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEnvironmentReq($index, 9, en_9)">
+                                <option disabled value="">{{environmentreq[9].name || '[&lt;qualifying expression&gt;]'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <value> -->
+                            <select data-ng-model="en_10" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEnvironmentReq($index, 10, en_10)" data-wj-validation-error="!environmentreq[10].name">
+                                <option disabled value="">{{environmentreq[10].name || '&lt;value&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <button type="button" class="btn btn-default" data-ng-click="removeEnvironmentReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <p class="text-muted">{{environmentreq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END EnvironmentMASTER -->
+
+                <!-- ProcessMASTER -->
+                <div data-ng-repeat="processreq in processrequirements">
+                    <label>PRO-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- [<Condition>] -->
+                            <select data-ng-model="pro_1" class="form-control" data-ng-click="newConditionOver()" data-ng-mouseleave="newConditionLeave()" data-ng-options="condition[1].to_string for condition in conditions" data-ng-change="addtoProcessReq($index, 1, pro_1)">
+                                <option disabled value="">{{processreq[1].name || '[&lt;Condition&gt;]'}}</option>
+                            </select>
+                            <!-- <actor> -->
+                            <select data-ng-model="pro_2" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoProcessReq($index, 2, pro_2)" data-wj-validation-error="!processreq[2].name">
+                                <option disabled value="">{{processreq[2].name || '&lt;actor&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <liability> -->
+                            <select data-ng-model="pro_3" class="form-control" data-ng-options="liability.name for liability in liabilities" data-ng-change="addtoProcessReq($index, 3, pro_3)" data-wj-validation-error="!processreq[3].name">
+                                <option disabled value="">{{processreq[3].name || '&lt;liability&gt;'}}</option>
+                            </select>
+                            <!-- <process verb> -->
+                            <select data-ng-model="pro_4" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoProcessReq($index, 4, pro_4)" data-wj-validation-error="!processreq[4].name">
+                                <option disabled value="">{{processreq[4].name || '&lt;process verb&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <object> -->
+                            <select data-ng-model="pro_5" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoProcessReq($index, 5, pro_5)" data-wj-validation-error="!processreq[5].name">
+                                <option disabled value="">{{processreq[5].name || '&lt;object&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeProcessReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <p class="text-muted">{{processreq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END ProcessMASTER -->
+
+
+                <!-- Conditions -->
+                <div data-ng-repeat="condition in conditions">
+                    <label>{{condition[0].id}}</label>
+                    <form class="form-inline">
+
+                        <!-- ConditionMASTER -->
+                        <div class="form-group" data-ng-if="condition[0].id.substring(0, 9) == 'Condition' && condition[0].id.length < 14">
+                            <!-- <condition> -->
+                            <select data-ng-model="con_2" class="form-control" data-ng-options="condition.name for condition in condition_terms" data-ng-change="addtoCondition($index, 2, con_2)" data-wj-validation-error="!condition[2].name">
+                                <option disabled value="">{{condition[2].name || '&lt;Condition&gt;'}}</option>
+                            </select>
+                            <!-- <logical expression> -->
+                            <select data-ng-model="condition[3].name" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoCondition($index, 3, condition[3].name)" data-ng-if="condition[2].name=='If'" data-wj-validation-error="!condition[3].name">
+                                <option disabled value="">{{condition[3].name || '&lt;logical expression&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <event> -->
+                            <select data-ng-model="con_3" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoCondition($index, 3, con_3)" data-ng-if="condition[2].name=='As soon as'" data-wj-validation-error="!condition[3].name">
+                                <option disabled value="">{{condition[3].name || '&lt;event&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <time period> -->
+                            <select data-ng-model="con_3" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoCondition($index, 3, con_3)" data-ng-if="condition[2].name=='As long as'" data-wj-validation-error="!condition[3].name">
+                                <option disabled value="">{{condition[3].name || '&lt;time period&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeCondition($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <!-- END ConditionMASTER -->
+
+                        <!-- LogicMASTER -->
+                        <div class="form-group" data-ng-if="condition[0].id.substring(12, 17) == 'Logic'">
+                            <!-- if -->
+                            <span>{{condition[2].name}}</span>
+                            <!-- -choose- -->
+                            <select data-ng-model="log_3" class="form-control" data-ng-options="term.name for term in logic_terms1" data-ng-change="addtoLogic($index, 3, log_3)" data-wj-validation-error="!condition[3].name">
+                                <option disabled value="">{{condition[3].name || '-choose-'}}</option>
+                            </select>
+                            <!-- case <compared object> -->
+                            <span data-ng-if="condition[3].name=='<compared object>'">
+                                <!-- <compared object> -->
+                                <select data-ng-model="log_4" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()"  data-ng-change="addtoLogic($index, 4, log_4)" data-wj-validation-error="!condition[4].name">
+                                    <option disabled value="">{{condition[4].name || '&lt;compared object&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                                </select>
+                                <!-- is -->
+                                <span>{{condition[5].name}}</span>
+                            <!-- qualifying expression -->
+                            <select data-ng-model="log_6" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoLogic($index, 6, log_6)" data-wj-validation-error="!condition[6].name">
+                                <option disabled value="">{{condition[6].name || '&lt;qualifying expression&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- value -->
+                            <select data-ng-model="log_7" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoLogic($index, 7, log_7)" data-wj-validation-error="!condition[7].name">
+                                <option disabled value="">{{condition[7].name || '&lt;value&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+
+                            <!-- else -->
+                            <span data-ng-if="condition[3].name && condition[3].name!='<compared object>'">
+                                <!-- <system> -->
+                                <select data-ng-model="log_9" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()"  data-ng-change="addtoLogic($index, 9, log_9)" data-ng-if="condition[3].name=='<system>'" data-wj-validation-error="!condition[9].name">
+                                    <option disabled value="">{{condition[9].name || '&lt;system&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                                </select>
+                                <!-- <actor> -->
+                                <select data-ng-model="log_10" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()"  data-ng-change="addtoLogic($index, 10, log_10)" data-ng-if="condition[2].name=='<actor>'" data-wj-validation-error="!condition[10].name">
+                                    <option disabled value="">{{condition[10].name || '&lt;actor&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                                </select>
+                                <!-- <process verb> -->
+                                <select data-ng-model="log_11" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()"  data-ng-change="addtoLogic($index, 11, log_11)" data-wj-validation-error="!condition[11].name">
+                                    <option disabled value="">{{condition[11].name || '&lt;process verb&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                                </select>
+                                <!-- -choose-  -->
+                                <select data-ng-model="log_12" class="form-control" data-ng-options="term.name for term in logic_terms2" data-ng-change="addtoLogic($index, 12, log_12)" data-wj-validation-error="!condition[12].name">
+                                <option disabled value="">{{condition[12].name || '-choose-'}}</option>
+                                </select>
+                                <!-- <object> -->
+                                <select data-ng-model="log_13" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()"  data-ng-change="addtoLogic($index, 13, log_13)" data-ng-if="condition[12].name=='<object>'" data-wj-validation-error="!condition[13].name">
+                                    <option disabled value="">{{condition[13].name || '&lt;object&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                                </select>
+                                <!-- the function -->
+                                <span data-ng-if="condition[12].name=='the function <function>'">{{condition[14].name}}</span>
+                            <!-- <function> -->
+                            <select data-ng-model="log_15" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoLogic($index, 15, log_15)" data-ng-if="condition[12].name=='the function <function>'" data-wj-validation-error="!condition[15].name">
+                                <option disabled value="">{{condition[15].name || '&lt;function&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeCondition($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <!-- END LogicMASTER -->
+
+                        <!-- EventMASTER -->
+                        <div class="form-group" data-ng-if="condition[0].id.substring(12, 17) == 'Event'">
+                            <!-- As soon as -->
+                            <span>{{condition[2].name}}</span>
+                            <!-- -choose- -->
+                            <select data-ng-model="ev_3" class="form-control" data-ng-options="term.name for term in event_terms" data-ng-change="addtoEvent($index, 3, ev_3)" data-wj-validation-error="!condition[3].name">
+                                <option disabled value="">{{condition[3].name || '-choose-'}}</option>
+                            </select>
+                            <!-- case the event <event> -->
+                            <span data-ng-if="condition[3].name=='the event <event>'">
+                                <!-- the event -->
+                                <span>{{condition[4].name}}</span>
+                            <!-- <event> -->
+                            <select data-ng-model="ev_5" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEvent($index, 5, ev_5)" data-wj-validation-error="!condition[5].name">
+                                <option disabled value="">{{condition[5].name || '&lt;event&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- happens -->
+                            <span>{{condition[6].name}}</span>
+                            </span>
+
+                            <!-- case <actor> -->
+                            <span data-ng-if="condition[3].name=='<actor>'">
+                                <select data-ng-model="ev_7" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEvent($index, 7, ev_7)" data-wj-validation-error="!condition[7].name">
+                                <option disabled value="">{{condition[7].name || '&lt;actor&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+                            <!-- case <system> -->
+                            <span data-ng-if="condition[3].name=='<system>'">
+                                <select data-ng-model="ev_8" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEvent($index, 8, ev_8)" data-wj-validation-error="!condition[8].name">
+                                <option disabled value="">{{condition[8].name || '&lt;system&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+                            <!-- case <actor> || <system> -->
+                            <span data-ng-if="(condition[3].name=='<actor>')||(condition[3].name=='<system>')">
+                                <!-- case <process verb> -->
+                                <select data-ng-model="ev_9" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEvent($index, 9, ev_9)" data-wj-validation-error="!condition[9].name">
+                                <option disabled value="">{{condition[9].name || '&lt;process verb&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            
+                            <!-- -choose- -->
+                            <select data-ng-model="ev_10" class="form-control" data-ng-options="term.name for term in logic_terms2" data-ng-change="addtoEvent($index, 10, ev_10)" data-wj-validation-error="!condition[10].name">
+                                <option disabled value="">{{condition[10].name || '-choose-'}}</option>
+                            </select>
+                            <!-- <object> -->
+                            <select data-ng-model="ev_11" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEvent($index, 11, ev_11)" data-ng-if="condition[10].name=='<object>'" data-wj-validation-error="!condition[11].name">
+                                <option disabled value="">{{condition[11].name || '&lt;object&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- the function -->
+                            <span data-ng-if="condition[10].name=='the function <function>'">{{condition[12].name}}</span>
+                            <!-- <function> -->
+                            <select data-ng-model="ev_13" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEvent($index, 13, ev_13)" data-ng-if="condition[10].name=='the function <function>'" data-wj-validation-error="!condition[13].name">
+                                <option disabled value="">{{condition[13].name || '&lt;function&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeCondition($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <!-- END EventMASTER -->
+
+                        <!-- TimeMASTER -->
+                        <div class="form-group" data-ng-if="condition[0].id.substring(12, 16) == 'Time'">
+                            <!-- As soon as -->
+                            <span>{{condition[2].name}}</span>
+                            <!-- -choose- -->
+                            <select data-ng-model="tim_3" class="form-control" data-ng-options="term.name for term in time_terms1" data-ng-change="addtoTime($index, 3, tim_3)" data-wj-validation-error="!condition[3].name">
+                                <option disabled value="">{{condition[3].name || '-choose-'}}</option>
+                            </select>
+                            <!-- case <the/an <object>> -->
+                            <span data-ng-if="condition[3].name=='the/an <object>'">
+                                <!-- -choose- -->
+                                <select data-ng-model="tim_4" class="form-control" data-ng-options="term.name for term in time_terms2" data-ng-change="addtoTime($index, 4, tim_4)" data-wj-validation-error="!condition[4].name">
+                                <option disabled value="">{{condition[4].name || '-choose-'}}</option>
+                                </select>
+                                <!-- <object> -->
+                                <select data-ng-model="tim_5" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()"  data-ng-change="addtoTime($index, 5, tim_5)" data-wj-validation-error="!condition[5].name">
+                                    <option disabled value="">{{condition[5].name || '&lt;object&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                                </select>
+                            </span>
+                            <!-- case <system> is -->
+                            <span data-ng-if="condition[3].name=='<system> is'">
+                                <select data-ng-model="tim_6" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()"  data-ng-change="addtoTime($index, 6, tim_6)" data-wj-validation-error="!condition[6].name">
+                                <option disabled value="">{{condition[6].name || '&lt;system&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+                            <!-- case <the/an <object>> || <system> -->
+                            <span data-ng-if="(condition[3].name=='the/an <object>')||(condition[3].name=='<system> is')">
+                                <!-- is -->
+                            <span>{{condition[7].name}}</span>
+                            <!-- in the state -->
+                            <span>{{condition[8].name}}</span>
+                            <!-- <state> -->
+                            <select data-ng-model="tim_9" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoTime($index, 9, tim_9)" data-wj-validation-error="!condition[9].name">
+                                <option disabled value="">{{condition[9].name || '&lt;state&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+
+                            <!-- case <actor> -->
+                            <span data-ng-if="condition[3].name=='<actor>'">
+                                <!-- <actor> -->
+                            <select data-ng-model="tim_10" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoTime($index, 10, tim_10)" data-wj-validation-error="!condition[10].name">
+                                <option disabled value="">{{condition[10].name || '&lt;actor&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                                <!-- <process verb> -->
+                            <select data-ng-model="tim_11" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoTime($index, 11, tim_11)" data-wj-validation-error="!condition[11].name">
+                                <option disabled value="">{{condition[11].name || '&lt;process verb&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                                <!-- -choose-  -->
+                            <select data-ng-model="tim_12" class="form-control" data-ng-options="term.name for term in logic_terms2" data-ng-change="addtoTime($index, 12, tim_12)" data-wj-validation-error="!condition[12].name">
+                                <option disabled value="">{{condition[12].name || '-choose-'}}</option>
+                            </select>
+                                <!-- <object> -->
+                            <select data-ng-model="tim_15" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoTime($index, 15, tim_15)" data-ng-if="condition[12].name=='<object>'" data-wj-validation-error="!condition[12].name">
+                                <option disabled value="">{{condition[15].name || '&lt;object&gt;'}}</option> 
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                                <!-- the function -->
+                            <span data-ng-if="condition[12].name=='the function <function>'">{{condition[13].name}}</span>
+                            <!-- <function> -->
+                            <select data-ng-model="tim_14" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoTime($index, 14, tim_14)" data-ng-if="condition[12].name=='the function <function>'" data-wj-validation-error="!condition[14].name">
+                                <option disabled value="">{{condition[14].name || '&lt;function&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+
+
+                            <!-- case <system> -->
+                            <span data-ng-if="condition[3].name=='<system>'">
+                                <!-- <system> -->
+                            <select data-ng-model="tim_16" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoTime($index, 16, tim_16)" data-wj-validation-error="!condition[16].name">
+                                <option disabled value="">{{condition[16].name || '&lt;system&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                                <!-- <process verb> -->
+                            <select data-ng-model="tim_17" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoTime($index, 17, tim_17)" data-wj-validation-error="!condition[17].name">
+                                <option disabled value="">{{condition[17].name || '&lt;process verb&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                                <!-- <system> -->
+                            <select data-ng-model="tim_18" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoTime($index, 18, tim_18)" data-wj-validation-error="!condition[18].name">
+                                <option disabled value="">{{condition[18].name || '&lt;object&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            </span>
+
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeCondition($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <!-- END TimeMASTER -->
+
+                    </form>
+                    <p class="text-muted">{{condition[1].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END Conditions -->
+
+            </div>
+
+        </div>
+        <!-- End MASTER -->
+
+
+        <div class="ears" data-ng-show="ears">
+            <div class="col-md-4 col-sm-4 col-xs-12 pull-right box-shadow-blue controlls">
+                <h5>Controls</h5>
+                <hr>
+                <form class="form-inline">
+                    <button type="button" class="btn btn-default new-term" data-ng-click="newTerm()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New term
+                    </button>
+                    <span data-ng-if="!term_saved">
+                                <span data-ng-repeat="term in terms" data-ng-if="$last">
+                                    <input class="form-control" type="text" placeholder="Term-{{$index+1}}" data-ng-model="term_input.name">
+                                    <button type="button" class="btn btn-default" data-ng-disabled="!term_input" data-ng-click="addtoTerms()"><span class="glyphicon glyphicon-ok text-gray"></span></button>
+                    </span>
+                    </span>
+                    <span class="success">&nbsp;&nbsp;Term saved successfully.</span>
+                </form>
+                <hr>
+                <label><small>EARS</small>
+                </label> <small>Requirements</small>
+                <br>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newUbiquitousReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ubiquitous
+                </button>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newEventReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Event-driven
+                </button>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newUnwantedReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Unwanted behaviour
+                </button>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newStateReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> State-driven
+                </button>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newOptionalReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Optional features
+                </button>
+                <button type="button" class="btn btn-default btn-xs" data-ng-click="newComplexReq()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Complex
+                </button>
+                <hr>
+                <div class="visible-lg visible-md preview">
+                    <h5 class="text-uppercase text-muted text-right">Preview</h5>
+                    <h4>Requirements:</h4>
+                    <br>
+                    <div data-ng-repeat="ubiquitousreq in ubiquitousrequirements">
+                        <b>UB-RQ-{{$index+1}} </b> {{ubiquitousreq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                    <div data-ng-repeat="eventreq in eventrequirements">
+                        <b>EVD-RQ-{{$index+1}} </b> {{eventreq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                    <div data-ng-repeat="unwantedreq in unwantedrequirements">
+                        <b>UWB-RQ-{{$index+1}} </b> {{unwantedreq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                    <div data-ng-repeat="statereq in staterequirements">
+                        <b>STD-RQ-{{$index+1}} </b> {{statereq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                    <div data-ng-repeat="optionalreq in optionalrequirements">
+                        <b>OPF-RQ-{{$index+1}} </b> {{optionalreq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                    <div data-ng-repeat="complexreq in complexrequirements">
+                        <b>CX-RQ-{{$index+1}} </b> {{complexreq[0].to_string}}
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div data-ng-if="!defined_ears">
+                    <p>Specify your requirements here.</p>
+                    <br>
+                    <p>To create a new <b>EARS</b> requirement or a new term, use the Controls menu.</p>
+                </div>
+                <!-- Ubiquitous -->
+                <div data-ng-repeat="ubiquitousreq in ubiquitousrequirements">
+                    <label>UB-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- The -->
+                            <span>{{ubiquitousreq[1].name}}</span>
+                            <!-- <system name> -->
+                            <select data-ng-model="ub_2" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoUbiquitousReq($index, 2, ub_2)" data-wj-validation-error="!ubiquitousreq[2].name">
+                                <option disabled value="">{{ubiquitousreq[2].name || '&lt;system name&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- shall -->
+                            <span>{{ubiquitousreq[3].name}}</span>
+                            <!-- <system response> -->
+                            <select data-ng-model="ub_4" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoUbiquitousReq($index, 4, ub_4)" data-wj-validation-error="!ubiquitousreq[4].name">
+                                <option disabled value="">{{ubiquitousreq[4].name || '&lt;system response&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeUbiquitousReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-muted">{{ubiquitousreq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END Ubiquitous -->
+
+                <!-- Event-driven -->
+                <div data-ng-repeat="eventreq in eventrequirements">
+                    <label>EVD-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- When -->
+                            <span>{{eventreq[1].name}}</span>
+                            <!-- <optional preconditions> -->
+                            <select data-ng-model="ev_2" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEventReq($index, 2, ev_2)">
+                                <option disabled value="">{{eventreq[2].name || '&lt;optional precondition&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <trigger> -->
+                            <select data-ng-model="ev_3" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEventReq($index, 3, ev_3)" data-wj-validation-error="!eventreq[3].name">
+                                <option disabled value="">{{eventreq[3].name || '&lt;trigger&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- the -->
+                            <span>, {{eventreq[4].name}}</span>
+                            <!-- <system name> -->
+                            <select data-ng-model="ev_5" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEventReq($index, 5, ev_5)" data-wj-validation-error="!eventreq[5].name">
+                                <option disabled value="">{{eventreq[5].name || '&lt;system name&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- shall -->
+                            <span>{{eventreq[6].name}}</span>
+                            <!-- <system response> -->
+                            <select data-ng-model="ev_7" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoEventReq($index, 7, ev_7)" data-wj-validation-error="!eventreq[7].name">
+                                <option disabled value="">{{eventreq[7].name || '&lt;system response&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeEventReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-muted">{{eventreq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END Event-driven -->
+
+                <!-- Unwanted behavours -->
+                <div data-ng-repeat="unwantedreq in unwantedrequirements">
+                    <label>UWB-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- If -->
+                            <span>{{unwantedreq[1].name}}</span>
+                            <!-- <optional preconditions> -->
+                            <select data-ng-model="uw_2" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoUnwantedReq($index, 2, uw_2)">
+                                <option disabled value="">{{unwantedreq[2].name || '&lt;optional precondition&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- <trigger> -->
+                            <select data-ng-model="uw_3" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoUnwantedReq($index, 3, uw_3)" data-wj-validation-error="!unwantedreq[3].name">
+                                <option disabled value="">{{unwantedreq[3].name || '&lt;trigger&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- then -->
+                            <span>, {{unwantedreq[4].name}}</span>
+                            <!-- the -->
+                            <span>{{unwantedreq[5].name}}</span>
+                            <!-- <system name> -->
+                            <select data-ng-model="uw_6" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoUnwantedReq($index, 6, uw_6)" data-wj-validation-error="!unwantedreq[6].name">
+                                <option disabled value="">{{unwantedreq[6].name || '&lt;system name&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- shall -->
+                            <span>{{unwantedreq[7].name}}</span>
+                            <!-- <system response> -->
+                            <select data-ng-model="uw_8" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoUnwantedReq($index, 8, uw_8)" data-wj-validation-error="!unwantedreq[8].name">
+                                <option disabled value="">{{unwantedreq[8].name || '&lt;system response&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeUnwantedReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-muted">{{unwantedreq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END Unwanted behaviours -->
+
+
+                <!-- State-driven requirements -->
+                <div data-ng-repeat="statereq in staterequirements">
+                    <label>STD-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- While -->
+                            <span>{{statereq[1].name}}</span>
+                            <!-- <in a specific state> -->
+                            <select data-ng-model="std_2" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoStateReq($index, 2, std_2)" data-wj-validation-error="!statereq[2].name">
+                                <option disabled value="">{{statereq[2].name || '&lt;in a specific date&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- the -->
+                            <span>, {{statereq[3].name}}</span>
+                            <!-- <system name> -->
+                            <select data-ng-model="std_4" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoStateReq($index, 4, std_4)" data-wj-validation-error="!statereq[4].name">
+                                <option disabled value="">{{statereq[4].name || '&lt;system name&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- shall -->
+                            <span>{{statereq[5].name}}</span>
+                            <!-- <system response> -->
+                            <select data-ng-model="std_6" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoStateReq($index, 6, std_6)" data-wj-validation-error="!statereq[6].name">
+                                <option disabled value="">{{statereq[6].name || '&lt;system response&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeStateReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-muted">{{statereq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END State-driven -->
+
+
+                <!-- Optional features -->
+                <div data-ng-repeat="optionalreq in optionalrequirements">
+                    <label>OPF-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- Where -->
+                            <span>{{optionalreq[1].name}}</span>
+                            <!-- <feature is included> -->
+                            <select data-ng-model="op_2" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoOptionalReq($index, 2, op_2)" data-wj-validation-error="!optionalreq[2].name">
+                                <option disabled value="">{{optionalreq[2].name || '&lt;feature is included&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- the -->
+                            <span>, {{optionalreq[3].name}}</span>
+                            <!-- <system name> -->
+                            <select data-ng-model="op_4" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoOptionalReq($index, 4, op_4)" data-wj-validation-error="!optionalreq[4].name">
+                                <option disabled value="">{{optionalreq[4].name || '&lt;system name&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+                            <!-- shall -->
+                            <span>{{optionalreq[5].name}}</span>
+                            <!-- <system response> -->
+                            <select data-ng-model="op_6" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-change="addtoOptionalReq($index, 6, op_6)" data-wj-validation-error="!optionalreq[6].name">
+                                <option disabled value="">{{optionalreq[6].name || '&lt;system response&gt;'}}</option>
+                                <option data-ng-repeat="term in terms" title="{{term.definition || ''}}">{{term.name}}</option>
+                            </select>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeOptionalReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-muted">{{optionalreq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END Optional features -->
+
+                <!-- Complex requirements -->
+                <div data-ng-repeat="complexreq in complexrequirements">
+                    <label>CPX-RQ-{{$index+1}}</label>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <!-- When -->
+                            <span>{{complexreq[1].name}}</span>
+                            <!-- <optional preconditions> -->
+                            <select data-ng-model="com_2" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-options="term.name for term in terms" data-ng-change="addtoComplexReq($index, 2, com_2)">
+                                <option disabled value="">{{complexreq[2].name || '&lt;optional precondition&gt;'}}</option>
+                            </select>
+                            <!-- <trigger> -->
+                            <select data-ng-model="com_3" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-options="term.name for term in terms" data-ng-change="addtoComplexReq($index, 3, com_3)">
+                                <option disabled value="">{{complexreq[3].name || '&lt;trigger&gt;'}}</option>
+                            </select>
+                            <!-- While -->
+                            <span>, {{complexreq[4].name}}</span>
+                            <!-- <in a specific state> -->
+                            <select data-ng-model="com_5" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-options="term.name for term in terms" data-ng-change="addtoComplexReq($index, 5, com_5)">
+                                <option disabled value="">{{complexreq[5].name || '&lt;in a specific state&gt;'}}</option>
+                            </select>
+                            <!-- Where -->
+                            <span>, {{complexreq[6].name}}</span>
+                            <!-- <feature is included> -->
+                            <select data-ng-model="com_7" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-options="term.name for term in terms" data-ng-change="addtoComplexReq($index, 7, com_7)">
+                                <option disabled value="">{{complexreq[7].name || '&lt;feature is included&gt;'}}</option>
+                            </select>
+                            <!-- If -->
+                            <span>, {{complexreq[8].name}}</span>
+                            <!-- <optional preconditions> -->
+                            <select data-ng-model="com_9" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-options="term.name for term in terms" data-ng-change="addtoComplexReq($index, 9, com_9)">
+                                <option disabled value="">{{complexreq[9].name || '&lt;optional precondition&gt;'}}</option>
+                            </select>
+                            <!-- <trigger> -->
+                            <select data-ng-model="com_10" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-options="term.name for term in terms" data-ng-change="addtoComplexReq($index, 10, com_10)">
+                                <option disabled value="">{{complexreq[10].name || '&lt;trigger&gt;'}}</option>
+                            </select>
+                            <!-- then -->
+                            <span>, {{complexreq[11].name}}</span>
+
+                            <!-- the -->
+                            <span>{{complexreq[12].name}}</span>
+                            <!-- <system name> -->
+                            <select data-ng-model="com_13" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-options="term.name for term in terms" data-ng-change="addtoComplexReq($index, 13, com_13)" data-wj-validation-error="!complexreq[13].name">
+                                <option disabled value="">{{complexreq[13].name || '&lt;system name&gt;'}}</option>
+                            </select>
+                            <!-- shall -->
+                            <span>{{complexreq[14].name}}</span>
+                            <!-- <system response> -->
+                            <select data-ng-model="com_15" class="form-control" data-ng-click="newTermOver()" data-ng-mouseleave="newTermLeave()" data-ng-options="term.name for term in terms" data-ng-change="addtoComplexReq($index, 15, com_15)" data-wj-validation-error="!complexreq[15].name">
+                                <option disabled value="">{{complexreq[15].name || '&lt;system response&gt;'}}</option>
+                            </select>
+
+                            <button type="button" class="btn btn-default" data-ng-click="removeComplexReq($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-muted">{{complexreq[0].to_string}}</p>
+                    <br>
+                </div>
+                <!-- END Complex requirements -->
+
+
+            </div>
+        </div>
+        <!-- End EARS -->
+
+
+        <div class="glossary" data-ng-show="glossary">
+            <div class="col-md-4 col-sm-4 col-xs-12 pull-right box-shadow-blue controlls">
+                <h5>Controls</h5>
+                <hr>
+                <form class="form-inline">
+                    <button type="button" class="btn btn-default new-term" data-ng-click="newTerm()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New term
+                    </button>
+                    <span data-ng-if="!term_saved">
+                                <span data-ng-repeat="term in terms" data-ng-if="$last">
+                                    <input class="form-control" type="text" placeholder="Term-{{$index+1}}" data-ng-model="term_input.name">
+                                    <button type="button" class="btn btn-default" data-ng-disabled="!term_input" data-ng-click="addtoTerms()"><span class="glyphicon glyphicon-ok text-gray"></span></button>
+                    </span>
+                    </span>
+                    <span class="success">&nbsp;&nbsp;Term saved successfully.</span>
+                </form>
+                <hr>
+                <div class="visible-lg visible-md preview">
+                    <h5 class="text-uppercase text-muted text-right">Preview</h5>
+                    <h4>Glossary:</h4>
+                    <div data-ng-repeat="term in terms">
+                        <p data-ng-if="term.name">
+                            <b>Term-{{$index+1}}</b>
+                            <b>{{term.name}}:</b> {{term.definition ||"-"}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- Glossary -->
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div data-ng-if="!defined_terms">
+                    <p>Define your terms here.</p>
+                    <br>
+                    <p>To create a new term, use the Controls menu.</p>
+                </div>
+                <div data-ng-repeat="term in terms">
+                    <div data-ng-if="term.name">
+                        <label>Term-{{$index+1}}</label>
+                        <form class="form-inline">
+                            <input id="term_name" class="form-control" type="text" placeholder="Name" data-ng-model="term.name" data-ng-change="addtoTerms()">
+                            <button type="button" class="btn btn-default" data-ng-click="removeTerm($index)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                        <textarea id="term_definition" class="form-control" placeholder="Definition" data-ng-model="term.definition" data-ng-change="addtoTerms()"></textarea>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End glossary -->
+
+
+
+        <div class="results" data-ng-show="results">
+            <div data-ng-if="!defined_master && !defined_ears && !defined_terms">
+                <p>To see the results, please create a new requirement.</p>
+            </div>
+            <div data-ng-if="defined_master || defined_ears || defined_terms">
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <h4>Results</h4>
+                    <p>
+                        <button type="button" class="btn btn-default" data-ng-click="printIt()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print</button>
+                    </p>
+                    <p>
+                        <button id="generatepdf" class="btn btn-default" data-ng-click="generatePDF()"><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> Generate PDF</button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-default btn-sm" data-ng-click="clearTerms()">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Remove all Terms
+                        </button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-default btn-sm" data-ng-click="clearMaster()">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Remove <small>MAST<small>E</small>R</small> Requirements
+                        </button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-default btn-sm" data-ng-click="clearEars()">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Remove <small>EARS</small> Requirements
+                        </button>
+                    </p>
+                </div>
+
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div id="result" class="box-shadow-blue result">
+                        <h4 class="text-uppercase">Requirements document</h4>
+                        <p><small>Generated with Requirements generator</small></p>
+                        <hr>
+                        <div data-ng-if="defined_terms">
+                            <h4>Glossary:</h4>
+                            <div data-ng-repeat="term in terms">
+                                <p data-ng-if="term.definition">
+                                    <b>Term-{{$index+1}}</b>
+                                    <b>{{term.name}}:</b> {{term.definition}}
+                                </p>
+                            </div>
+                            <br>
+                        </div>
+                        <div data-ng-if="defined_master">
+                            <h4>MAST<small>E</small>R Requirements:</h4>
+                            <br>
+                            <div data-ng-repeat="functionalreq in functionalrequirements">
+                                <p data-ng-if="functionalreq[0].to_string"><b>FUN-RQ-{{$index+1}} </b> {{functionalreq[0].to_string}}</p>
+                            </div>
+                            <div data-ng-repeat="propertyreq in propertyrequirements">
+                                <p data-ng-if="propertyreq[0].to_string"><b>PRT-RQ-{{$index+1}} </b> {{propertyreq[0].to_string}}</p>
+                            </div>
+                            <div data-ng-repeat="environmentreq in environmentrequirements">
+                                <p data-ng-if="environmentreq[0].to_string"><b>EN-RQ-{{$index+1}} </b> {{environmentreq[0].to_string}}</p>
+                            </div>
+                            <div data-ng-repeat="processreq in processrequirements">
+                                <p data-ng-if="processreq[0].to_string"><b>PRO-RQ-{{$index+1}} </b> {{processreq[0].to_string}}</p>
+                            </div>
+                            <br>
+                        </div>
+                        <div data-ng-if="defined_ears">
+                            <h4>EARS Requirements:</h4>
+                            <br>
+                            <div data-ng-repeat="ubiquitousreq in ubiquitousrequirements">
+                                <p data-ng-if="ubiquitousreq[0].to_string"><b>UB-RQ-{{$index+1}} </b> {{ubiquitousreq[0].to_string}}</p>
+                            </div>
+                            <div data-ng-repeat="eventreq in eventrequirements">
+                                <p data-ng-if="eventreq[0].to_string"><b>EVD-RQ-{{$index+1}} </b> {{eventreq[0].to_string}}</p>
+                            </div>
+                            <div data-ng-repeat="unwantedreq in unwantedrequirements">
+                                <p data-ng-if="unwantedreq[0].to_string"><b>UWB-RQ-{{$index+1}} </b> {{unwantedreq[0].to_string}}</p>
+                            </div>
+                            <div data-ng-repeat="statereq in staterequirements">
+                                <p data-ng-if="statereq[0].to_string"><b>STD-RQ-{{$index+1}} </b> {{statereq[0].to_string}}</p>
+                            </div>
+                            <div data-ng-repeat="optionalreq in optionalrequirements">
+                                <p data-ng-if="optionalreq[0].to_string"><b>OPF-RQ-{{$index+1}} </b> {{optionalreq[0].to_string}}</p>
+                            </div>
+                            <div data-ng-repeat="complexreq in complexrequirements">
+                                <p data-ng-if="complexreq[0].to_string"><b>CX-RQ-{{$index+1}} </b> {{complexreq[0].to_string}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End results -->
+
+    </div>
+
+    <span id="top-link-block" class="hidden">
+        <button class="btn btn-primary btn-xs" onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+            <i class="glyphicon glyphicon-menu-up"></i> Back to Top
+        </button>
+    </span>
+
+    <footer>
+        <a href="mailto:francaballero@uni-koblenz.de" title="francaballero@uni-koblenz.de">
+            <p>Francisco José Caballero Cerezo</p>
+            <p>Universität Koblenz·Landau</p>
+        </a>
+    </footer>
+
+
+    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+    <script type="text/javascript">
+        window.cookieconsent_options = {
+            "message": "This website uses web storage to ensure you get the best experience on our website",
+            "dismiss": "Got it!",
+            "learnMore": "More info",
+            "link": null,
+            "theme": "dark-bottom"
+        };
+    </script>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+    <!-- End Cookie Consent plugin -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-cookies.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/jspdf.min.js"></script>
+
+    <script src="js/appController.js"></script>
+
+    <script>
+        $("[data-toggle=tooltip]").tooltip({
+            placement: $(this).data("placement") || 'top'
+        });
+    </script>
+
+</body>
+
+</html>
